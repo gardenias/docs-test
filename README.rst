@@ -1,19 +1,28 @@
-What is Alabaster?
-==================
+=============================
+Mozilla Version Control Tools
+=============================
 
-Alabaster is a visually (c)lean, responsive, configurable theme for the `Sphinx
-<http://sphinx-doc.org>`_ documentation system. It is Python 2+3 compatible.
+This repository contains tools, extensions, hooks, etc to support version
+control at Mozilla.
 
-It began as a third-party theme, and is still maintained separately, but as of
-Sphinx 1.3, Alabaster is an install-time dependency of Sphinx and is selected
-as the default theme.
+This repository contains the code that Mozilla uses in production to
+power `hg.mozilla.org <https://hg.mozilla.org>`_,
+`reviewboard.mozilla.org <https://reviewboard.mozilla.org>`_, and among
+other sites and services.
 
-Live examples of this theme can be seen on `this project's own website
-<http://alabaster.readthedocs.io>`_, `paramiko.org <http://paramiko.org>`_,
-`fabfile.org <http://fabfile.org>`_ and `pyinvoke.org <http://pyinvoke.org>`_.
+The canonical repository is https://hg.mozilla.org/hgcustom/version-control-tools/
 
-For more documentation, please see http://alabaster.readthedocs.io.
+Most documentation exists in the ``docs/`` directory. It can be
+`viewed online <https://mozilla-version-control-tools.readthedocs.io/en/latest/>`_
+on Read the Docs. Latest CI reports can be `viewed online
+<https://ci.mozilla.org/job/version-control-tools/>`_.
 
-.. note::
-    You can install the development version via ``pip install -e
-    git+https://github.com/bitprophet/alabaster/#egg=alabaster``.
+If you are interested in getting in touch with the people who maintain
+this repository, join ``#vcs`` in ``irc.mozilla.org``.
+
+.. note:: A dev environment is needed for performing admin operations
+
+    Before you can use any of the ansible playbooks for administration,
+    you must have a development environment set up already. Best
+    practice is to re-run ``./create-test-environment`` before using
+    ``./deploy`` as your ansible entry point.
