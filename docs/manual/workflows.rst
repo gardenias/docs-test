@@ -1,4 +1,4 @@
-.. _hgmozilla_workflows:
+.. _manual_workflows:
 
 =========
 Workflows

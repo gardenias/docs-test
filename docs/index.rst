@@ -1,8 +1,9 @@
 .. _index:
 
 ===============================
-Mozilla's Version Control Tools
+OneAPM's Mobile Insight Docs
 ===============================
+//TODO
 
 Welcome to Mozilla's version control tools repository! Inside, you will
 find all kind of code to support the development of code at Mozilla.
@@ -17,6 +18,8 @@ https://hg.mozilla.org/hgcustom/version-control-tools/.
 
 Goals
 =====
+
+//TODO
 
 The primary goal of this repository and the code therein is to enable
 Mozillians to move faster and to be more productive, all while
@@ -40,11 +43,9 @@ Table of Contents
    :maxdepth: 2
 
    devguide/index
-   hgcustom
-   mozreview
-   headless-repositories
-   hgmozilla/index
-   hgmo/index
+   manual/index
+   installing/index
+   releasenotes/index
 
 
 Indices and tables

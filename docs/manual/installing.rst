@@ -1,4 +1,4 @@
-.. _hgmozilla_installing:
+.. _manual_installing:
 
 ====================
 Installing Mercurial

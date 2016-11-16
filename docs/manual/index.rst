@@ -1,7 +1,7 @@
-.. _hgmozilla:
+.. _manual:
 
 ========================
-Mercurial for Mozillians
+Manual
 ========================
 
 Want to learn how to get the most from Mercurial at Mozilla? You've come
@@ -11,14 +11,4 @@ to the right place!
    :maxdepth: 2
 
    installing
-   extensions
-   auth
-   dag
    workflows
-   bookmarks
-   common
-   firefoxtree
-   unifiedrepo
-   firefoxworkflow
-   automation
-   issues
