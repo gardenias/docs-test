@@ -42,8 +42,9 @@ Table of Contents
 .. toctree::
    :maxdepth: 2
 
-   devguide/index
    manual/index
+   tech/index
+   api/index
    installing/index
    releasenotes/index
 

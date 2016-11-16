@@ -1,4 +1,4 @@
-.. _devguide_testing:
+.. _tech_testing:
 
 =======
 Testing

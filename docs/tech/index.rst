@@ -1,7 +1,7 @@
-.. _installing_index:
+.. _devguide_index:
 
 ===============
-Installing
+Tech
 ===============
 
 Interested in contributing to Mozilla's version control tools? You've
@@ -10,6 +10,8 @@ come to the right place!
 .. toctree::
    :maxdepth: 2
 
-   architecture
-   middleware
-   apm-mi
+   contributing
+   environment
+   testing
+   jenkins
+   docker
