@@ -1,4 +1,4 @@
-.. _devguide_index:
+.. _tech_index:
 
 ===============
 Tech

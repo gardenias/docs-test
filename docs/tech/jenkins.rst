@@ -1,4 +1,4 @@
-.. _devguide_jenkins:
+.. _tech_jenkins:
 
 ==============================
 Jenkins Continuous Integration

@@ -1,4 +1,4 @@
-.. _devguide_docker:
+.. _tech_docker:
 
 ======
 Docker

@@ -1,4 +1,4 @@
-.. _devguide_contributing:
+.. _tech_contributing:
 
 ============
 Contributing
