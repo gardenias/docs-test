@@ -21,6 +21,8 @@ MI-SERVER需要的组件包括：MI安装包，JDK，Zookeeper，Kafka，Redis�
 +============+================+
 | JAVA       | 1.8.0_45及以上 |
 +------------+----------------+
+| CentOS     | 7              |
++------------+----------------+
 | Zookeeper  | 官方最新版     |
 +------------+----------------+
 | Kafka      | 0.8.2.2        |
@@ -68,20 +70,39 @@ clickHouse下载地址：
 
 Kafka topic创建
 ^^^^^^^^^^^^^^^
+为DC创建topic：（分区数量等可以按照需要进行配置）
+.. code-block:: shell
+kafak目录/bin/kafka-topics.sh --zookeeper zookeeper地址:2181 --topic mi_ol_agent_original   --replication-factor 1   --partitions 3  --create
+
+为consumer创建topic：
+.. code-block:: shell
+  kafak目录/bin/kafka-topics.sh –zookeeper zookeeper地址:2181 –topic mi_tl_format_ajax –replication-factor 1 –partitions 1 –create
+  kafak目录/bin/kafka-topics.sh –zookeeper zookeeper地址:2181 –topic mi_tl_format_http –replication-factor 1 –partitions 1 –create
+  kafak目录/bin/kafka-topics.sh –zookeeper zookeeper地址:2181 –topic mi_tl_format_session –replication-factor 1 –partitions 1 –create
+  kafak目录/bin/kafka-topics.sh –zookeeper zookeeper地址:2181 –topic mi_tl_format_measurement –replication-factor 1 –partitions 1 –create
+
+
+为告警创建topic：
+.. code-block:: shell
+  kafak目录/bin/kafka-topics.sh –zookeeper zookeeper地址:2181 –create –topic as_jl_mi_event –partitions 1 –replication-factor 1 
+  kafka目录/bin/kafka-topics.sh –zookeeper zookeeper地址:2181 –create –topic as_jl_mi_alert –partitions 1 –replication-factor 1 
+
+
+验证topic是否创建成功 
+/opt/kafka-0.8.2.2/bin/kafka-topics.sh –list –zookeeper zookeeper地址:2181
+
+
 topic配置文件位于./consumer/conf/topicInfo.json,可通过修改配置文件来配置topic的partition和replication个数。
 目前安装过程会创建如下topic:
 
 .. code-block:: shell
+  as_jl_mi_alert
+  as_jl_mi_event
+  mi_tl_format_ajax
+  mi_tl_format_http
+  mi_tl_format_measurement
+  mi_tl_format_session
 
-  ai_jl_analytic
-  ai_jl_message
-  ai_jl_metricdata
-  ai_jl_simple
-  ai_jl_trace
-  tps-dc-metric-formatdata
-  as_jl_ai_event
-  ai_jl_analytic_preformat
-  ai_jl_analytic_afterformat
 
 Mysql和ClickHouse初始化
 ^^^^^^^^^^^^^^^^^^^^^^^^^
