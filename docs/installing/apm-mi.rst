@@ -4,8 +4,8 @@
 APM's Mi Installing
 ==============================
 
-Get Started
-============
+系统说明
+=========
 
 Requirement
 -------------------
@@ -36,12 +36,18 @@ MI-SERVER需要的组件包括：MI安装包，JDK，Zookeeper，Kafka，Redis�
 +------------+----------------+
 
 clickHouse下载地址：
-ftp://10.128.9.10/%D1%D0%B7%A2%D6%D0%D0%C4/%BB%F9%B4%A1%B9%B9%BC%DC%B2%BF/%BB%F9%B4%A1%B7%FE%CE%F1%D7%E9/clickHouse/54023/clickhouse_1.1.54023.tar.gz
+.. code-block:: shell
 
-安装clickhouse请参考:http://git.oneapm.me/platform/clickhouse_packager/tree/master
+  ftp://10.128.9.10/%D1%D0%B7%A2%D6%D0%D0%C4/%BB%F9%B4%A1%B9%B9%BC%DC%B2%BF/%BB%F9%B4%A1%B7%FE%CE%F1%D7%E9/clickHouse/54023/clickhouse_1.1.54023.tar.gz
 
-Installing
---------------
+安装clickhouse请参考:
+.. code-block:: shell
+
+  http://git.oneapm.me/platform/clickhouse_packager/tree/master
+
+
+安装说明
+=========
 
 解压
 ~~~~~~
@@ -51,7 +57,7 @@ Installing
 
   tar -zxvf OneAPM-Mobile-Insight-Installer.tar.gz
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 进入解压后的目录（接下来的操作都基于这个目录执行）
 
 .. code-block:: shell
@@ -91,9 +97,9 @@ sql文件位于OneAPM-Mobile-Insight-Installer/sql目录下
 2.需要单独执行sql/upgradeSql目录下das-ee-4.3.2-alarm.sql文件
 
 
+配置说明
+=========
 
-Configeration
--------------------------------
 DC/DV/CONSUMER配置修改
 ~~~~~~~~~~~~~~~~~~~~~~
 基础配置mysql|kafka|zookeeper|redis|clickhouse地址在/install.properties文件中配置
@@ -128,6 +134,7 @@ DC/DV/CONSUMER配置修改
   clickHouse_port=CLICKHOUSE_PORT
 
 举例：
+
 .. code-block:: shell
 
   #格式ip:port
@@ -159,6 +166,7 @@ DC/DV/CONSUMER配置修改
 确认修改配置
 
 .. code-block:: shell
+
   sh install.sh -c
   1) excuteNow   --确认配置无误，立即修改
   2) enterAgain  --配置有误需要重新输入
@@ -178,6 +186,7 @@ metrc_store的相关配置信息在/metric_store/conf/metric.conf文件中配置
   metric_store_port=METRIC_STORE:PORT
   
 举例：
+
 .. code-block:: shell
 
   consumer_dir=touch-metric-store
@@ -188,6 +197,7 @@ metrc_store的相关配置信息在/metric_store/conf/metric.conf文件中配置
   metric_store_port=9123
                      
  确认修改配置
+ 
  .. code-block:: shell
 
    sh setup.sh
