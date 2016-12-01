@@ -7,9 +7,6 @@ APM's Mi Installing
 系统说明
 =========
 
-Requirement
--------------------
-
 操作系统
 ~~~~~~~~~
 目前MI-SERVER *release-4.5.0* 安装包支持在Linux系统上部署。
@@ -36,11 +33,13 @@ MI-SERVER需要的组件包括：MI安装包，JDK，Zookeeper，Kafka，Redis�
 +------------+----------------+
 
 clickHouse下载地址：
+
 .. code-block:: shell
 
   ftp://10.128.9.10/%D1%D0%B7%A2%D6%D0%D0%C4/%BB%F9%B4%A1%B9%B9%BC%DC%B2%BF/%BB%F9%B4%A1%B7%FE%CE%F1%D7%E9/clickHouse/54023/clickhouse_1.1.54023.tar.gz
 
 安装clickhouse请参考:
+
 .. code-block:: shell
 
   http://git.oneapm.me/platform/clickhouse_packager/tree/master
@@ -202,12 +201,13 @@ metrc_store的相关配置信息在/metric_store/conf/metric.conf文件中配置
 
    sh setup.sh
  
-  
-Startup And Shutdown
--------------------------------
+
+启停服务
+=========
 
 一次性启停所有模块
-~~~~~~~~~~~~~~~~~~
+-------------------
+
 各模块日志文件在dist/das-web/config/application.properties文件中可以配置
 修改各模块日志目录可以通过以下命令:
 
@@ -225,7 +225,7 @@ Startup And Shutdown
   ./shutdown.sh
 
 单独模块的启停
-~~~~~~~~~~~~~~~~
+-------------------
 其中单独启动DC,DV,Consumer的时候,执行命令后可跟若干个jvm参数
 
 启停DC
