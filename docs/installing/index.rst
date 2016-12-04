@@ -11,5 +11,5 @@ come to the right place!
    :maxdepth: 2
 
    architecture
+   mi
    middleware
-   apm-mi

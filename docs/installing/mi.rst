@@ -1,20 +1,12 @@
-﻿.. _installing_apm-mi:
+﻿.. _installing_mi:
 
 ==============================
-APM's Mi Installing
+Mobile Insight Installing
 ==============================
 
-系统说明
-=========
 
-操作系统
-~~~~~~~~~
-目前MI-SERVER *release-4.5.0* 安装包支持在Linux系统上部署。
-
-公共环境
-~~~~~~~~~~
-MI-SERVER需要的组件包括：MI安装包，JDK，Zookeeper，Kafka，Redis，Mysql，ClickHouse。安装之前请准备好环境。
-各组件版本要求:
+Requirements
+-------------------
 
 +------------+----------------+
 | 组件       | 版本           |
@@ -34,82 +26,90 @@ MI-SERVER需要的组件包括：MI安装包，JDK，Zookeeper，Kafka，Redis�
 | ClickHouse | 1.1.54023      |
 +------------+----------------+
 
-clickHouse下载地址：
 
-.. code-block:: shell
+安装包结构说明
+-------------------
 
-  ftp://10.128.9.10/%D1%D0%B7%A2%D6%D0%D0%C4/%BB%F9%B4%A1%B9%B9%BC%DC%B2%BF/%BB%F9%B4%A1%B7%FE%CE%F1%D7%E9/clickHouse/54023/clickhouse_1.1.54023.tar.gz
+**解压**
 
-安装clickhouse请参考:
-
-.. code-block:: shell
-
-  http://git.oneapm.me/platform/clickhouse_packager/tree/master
-
-
-安装说明
-=========
-
-解压
-~~~~~~
 解压拿到的安装包OneAPM-Mobile-Insight-Installer.tar.gz
 
-.. code-block:: shell
+::
 
-  tar -zxvf OneAPM-Mobile-Insight-Installer.tar.gz
-
+  $ tar -zxvf OneAPM-Mobile-Insight-Installer.tar.gz
 
 进入解压后的目录（接下来的操作都基于这个目录执行）
 
-.. code-block:: shell
+::
 
-  cd OneAPM-Mobile-Insight-Installer
-
-安装过程topic的创建和数据库创建说明
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Kafka topic创建
-^^^^^^^^^^^^^^^
-为DC创建topic：（分区数量等可以按照需要进行配置）
-.. code-block:: shell
-kafak目录/bin/kafka-topics.sh --zookeeper zookeeper地址:2181 --topic mi_ol_agent_original   --replication-factor 1   --partitions 3  --create
-
-为consumer创建topic：
-.. code-block:: shell
-  kafak目录/bin/kafka-topics.sh –zookeeper zookeeper地址:2181 –topic mi_tl_format_ajax –replication-factor 1 –partitions 1 –create
-  kafak目录/bin/kafka-topics.sh –zookeeper zookeeper地址:2181 –topic mi_tl_format_http –replication-factor 1 –partitions 1 –create
-  kafak目录/bin/kafka-topics.sh –zookeeper zookeeper地址:2181 –topic mi_tl_format_session –replication-factor 1 –partitions 1 –create
-  kafak目录/bin/kafka-topics.sh –zookeeper zookeeper地址:2181 –topic mi_tl_format_measurement –replication-factor 1 –partitions 1 –create
+  $ cd OneAPM-Mobile-Insight-Installer
 
 
-为告警创建topic：
-.. code-block:: shell
-  kafak目录/bin/kafka-topics.sh –zookeeper zookeeper地址:2181 –create –topic as_jl_mi_event –partitions 1 –replication-factor 1 
-  kafka目录/bin/kafka-topics.sh –zookeeper zookeeper地址:2181 –create –topic as_jl_mi_alert –partitions 1 –replication-factor 1 
+创建 kafka topics
+-------------------
+
+1. dc ``must``
+
++--------------------------+----------------------+----------------------+
+| topic_name               |     factor-num       |      partion-num     |
++==========================+======================+======================+
+| mi_ol_agent_original     |          1           |         8            |
++--------------------------+----------------------+----------------------+
+
+2. consumer ``must``
+
++--------------------------+----------------------+----------------------+
+| topic_name               |     factor-num       |      partion-num     |
++==========================+======================+======================+
+| mi_tl_format_ajax        |          1           |         8            |
++--------------------------+----------------------+----------------------+
+| mi_tl_format_http        |          1           |         8            |
++--------------------------+----------------------+----------------------+
+| mi_tl_format_session     |          1           |         8            |
++--------------------------+----------------------+----------------------+
+|mi_tl_format_measurement  |          1           |         8            |
++--------------------------+----------------------+----------------------+
+ 
+3.  告警模块 ``optional`` [如果安装了系统告警模块，请创建以下topics]
+
++--------------------------+----------------------+----------------------+
+| topic_name               |     factor-num       |      partion-num     |
++==========================+======================+======================+
+| as_jl_mi_event           |          1           |         8            |
++--------------------------+----------------------+----------------------+
+| as_jl_mi_alert           |          1           |         8            |
++--------------------------+----------------------+----------------------+
+
+**command for topic creation:**
+::
+
+  $ $KAFKA_HOME/bin/kafka-topics.sh --zookeeper zookeeper <host:port> --topic <topic_name>   --replication-factor <factor-num>   --partitions <partion-num>  --create
+
+.. important::
+  
+  kafka 集群为单节点时 ``factor-num`` 必须为 ``1``;
+  ``factor-num`` <= ``集群中节点总数``
 
 
-验证topic是否创建成功 
-/opt/kafka-0.8.2.2/bin/kafka-topics.sh –list –zookeeper zookeeper地址:2181
+**验证topic是否创建成功**
+
+::
+
+  $ /opt/kafka-0.8.2.2/bin/kafka-topics.sh –list –zookeeper zookeeper地址:2181
 
 
 topic配置文件位于./consumer/conf/topicInfo.json,可通过修改配置文件来配置topic的partition和replication个数。
 目前安装过程会创建如下topic:
 
-.. code-block:: shell
-  as_jl_mi_alert
-  as_jl_mi_event
-  mi_tl_format_ajax
-  mi_tl_format_http
-  mi_tl_format_measurement
-  mi_tl_format_session
+
 
 
 Mysql和ClickHouse初始化
-^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------
 sql文件位于OneAPM-Mobile-Insight-Installer/sql目录下
 
-开始安装
-~~~~~~~~
+开始安装 Mobile Insight
+-------------------
 目前该版本仅支持全量安装
 
 ^^^^^^^^^^^^^^^
