@@ -1,31 +1,34 @@
 ﻿.. _installing_mi:
 
 ==============================
-Mobile Insight Installing
+Mi安装手册
 ==============================
 
 
-Requirements
+软件需求
 -------------------
 
-+------------+----------------+
-| 组件       | 版本           |
-+============+================+
-| JAVA       | 1.8.0_45及以上 |
-+------------+----------------+
-| CentOS     | 7              |
-+------------+----------------+
-| Zookeeper  | 官方最新版     |
-+------------+----------------+
-| Kafka      | 0.8.2.2        |
-+------------+----------------+
-| Redis      | 官方最新版     |
-+------------+----------------+
-| MySQL      | 5.6及以上      |
-+------------+----------------+
-| ClickHouse | 1.1.54023      |
-+------------+----------------+
++------------+----------------+------------------------------------------------------------------------------------+
+| 组件       | 版本           | 下载地址                                                                           |
++============+================+====================================================================================+
+| JAVA       | 1.8.0_45及以上 |                                                                                    |
++------------+----------------+------------------------------------------------------------------------------------+
+| CentOS     | 7              |                                                                                    |
++------------+----------------+------------------------------------------------------------------------------------+
+| Zookeeper  | 官方最新版     |  http://www.eu.apache.org/dist/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz    |
++------------+----------------+------------------------------------------------------------------------------------+
+| Kafka      | 0.8.2.2        |  https://dist.apache.org/repos/dist/release/kafka/0.8.2.2/kafka_2.9.2-0.8.2.2.tgz  |
++------------+----------------+------------------------------------------------------------------------------------+
+| Redis      | 官方最新版     |                                                                                    |
++------------+----------------+------------------------------------------------------------------------------------+
+| MySQL      | 5.6及以上      |                                                                                    |
++------------+----------------+------------------------------------------------------------------------------------+
+| ClickHouse | 1.1.54023      |  https://dist.apache.org/repos/dist/release/kafka/0.8.2.2/kafka_2.9.2-0.8.2.2.tgz  |
++------------+----------------+------------------------------------------------------------------------------------+
 
+.. important::
+  
+  确认以上公共组件全部安装成功，再开始安装Mi后台，具体的安装方法请查看组件安装章节。
 
 安装包结构说明
 -------------------
@@ -44,7 +47,44 @@ Requirements
 
   $ cd OneAPM-Mobile-Insight-Installer
 
+安装包结构如下：
 
+::
+
+   ├── dist
+   │   ├── das-web
+   │   │   ├── bin
+   │   │   ├── config
+   │   │   ├── lib
+   │   │   ├── logs
+   │   │   └── static
+   │   ├── data-collector
+   │   │   ├── bin
+   │   │   ├── config
+   │   │   ├── lib
+   │   │   └── logs
+   │   └── data-consumer
+   │       ├── bin
+   │       ├── config
+   │       ├── lib
+   │       └── logs
+   ├── libs
+   ├── metric_store
+   │   ├── ajax
+   │   ├── conf
+   │   ├── httptransaction
+   │   ├── measurement
+   │   ├── session
+   │   └── touch-metric-store
+   │       ├── bin
+   │       ├── conf
+   │       └── lib
+   ├── sql
+   │   ├── databases
+   │   └── upgradeSql
+   └── tools
+
+  
 创建 kafka topics
 -------------------
 
@@ -80,10 +120,10 @@ Requirements
 | as_jl_mi_alert           |          1           |         8            |
 +--------------------------+----------------------+----------------------+
 
-**command for topic creation:**
+**创建topics的命令:**
 ::
 
-  $ $KAFKA_HOME/bin/kafka-topics.sh --zookeeper zookeeper <host:port> --topic <topic_name>   --replication-factor <factor-num>   --partitions <partion-num>  --create
+  $ $KAFKA_HOME/bin/kafka-topics.sh --zookeeper <zookeeper host:port> --topic <topic_name>   --replication-factor <factor-num>   --partitions <partion-num>  --create
 
 .. important::
   
@@ -91,15 +131,11 @@ Requirements
   ``factor-num`` <= ``集群中节点总数``
 
 
-**验证topic是否创建成功**
+**验证topics是否创建成功**
 
 ::
 
-  $ /opt/kafka-0.8.2.2/bin/kafka-topics.sh –list –zookeeper zookeeper地址:2181
-
-
-topic配置文件位于./consumer/conf/topicInfo.json,可通过修改配置文件来配置topic的partition和replication个数。
-目前安装过程会创建如下topic:
+  $ /opt/kafka-0.8.2.2/bin/kafka-topics.sh –list –zookeeper <zookeeper host:port>
 
 
 
