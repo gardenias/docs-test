@@ -230,7 +230,7 @@ DC/DV/CONSUMER配置修改
 
 METIRC_STORE配置修改
 ~~~~~~~~~~~~~~~~~~~~~~
-metrc_store的相关配置信息在/metric_store/conf/metric.conf文件中配置
+metric_store的相关配置信息在/metric_store/conf/metric.conf文件中配置
 
 .. code-block:: shell
 
@@ -290,8 +290,8 @@ metrc_store的相关配置信息在/metric_store/conf/metric.conf文件中配置
 
 .. code-block:: shell
 
-  ./dc/bin/start.sh dc 
-  ./dc/bin/shutdown.sh dc 
+  ./package_dir/start.sh dc 
+  ./package_dir/shutdown.sh dc 
 
 
 启停DV
@@ -299,8 +299,8 @@ metrc_store的相关配置信息在/metric_store/conf/metric.conf文件中配置
 
 .. code-block:: shell
 
-  ./dv/bin/start.sh dv 
-  ./dv/bin/shutdown.sh dv
+  ./package_dir/start.sh dv 
+  ./package_dir/shutdown.sh dv
 
 
 
@@ -309,8 +309,8 @@ metrc_store的相关配置信息在/metric_store/conf/metric.conf文件中配置
 
 .. code-block:: shell
 
-  ./consumer/bin/start.sh consumer
-  ./consumer/bin/shutdown.sh consumer
+  ./package_dir/start.sh consumer
+  ./package_dir/shutdown.sh consumer
 
 
 启停MetricStore
@@ -318,8 +318,8 @@ metrc_store的相关配置信息在/metric_store/conf/metric.conf文件中配置
 
 .. code-block:: shell
 
-  ./metric-store/bin/startup.sh
-  ./metric-store/bin/shutdown_ms.sh
+  ./package_dir/metric-store/bin/startup.sh
+  ./package_dir/metric-store/bin/shutdown_ms.sh
 
 
 
