@@ -8,6 +8,7 @@ Mi安装手册
 软件需求
 -------------------
 
+
 +------------+----------------+------------------------------------------------------------------------------------+
 | 组件       | 版本           | 下载地址                                                                           |
 +============+================+====================================================================================+
@@ -26,7 +27,9 @@ Mi安装手册
 | ClickHouse | 1.1.54023      |  https://dist.apache.org/repos/dist/release/kafka/0.8.2.2/kafka_2.9.2-0.8.2.2.tgz  |
 +------------+----------------+------------------------------------------------------------------------------------+
 
+
 .. important::
+
   
   确认以上公共组件全部安装成功，再开始安装Mi后台，具体的安装方法请查看组件安装章节。
 
@@ -293,6 +296,13 @@ metric_store的相关配置信息在/metric_store/conf/metric.conf文件中配�
   ./package_dir/start.sh dc 
   ./package_dir/shutdown.sh dc 
 
+示例：
+
+.. code-block:: shell
+
+  ./package_dir/start.sh dc "-Xmx10240m -Xms10240m -Xmn5120m"
+  ./package_dir/shutdown.sh dc 
+
 
 启停DV
 ^^^^^^^^^^
@@ -302,7 +312,12 @@ metric_store的相关配置信息在/metric_store/conf/metric.conf文件中配�
   ./package_dir/start.sh dv 
   ./package_dir/shutdown.sh dv
 
+示例：
 
+.. code-block:: shell
+
+  ./package_dir/start.sh dv "-Xmx10240m -Xms10240m -Xmn5120m"
+  ./package_dir/shutdown.sh dv
 
 启停Consumer
 ^^^^^^^^^^^^^^^
@@ -312,6 +327,12 @@ metric_store的相关配置信息在/metric_store/conf/metric.conf文件中配�
   ./package_dir/start.sh consumer
   ./package_dir/shutdown.sh consumer
 
+示例：
+
+.. code-block:: shell
+
+  ./package_dir/start.sh consumer "-Xmx10240m -Xms10240m -Xmn5120m"
+  ./package_dir/shutdown.sh consumer
 
 启停MetricStore
 ^^^^^^^^^^^^^^^^
