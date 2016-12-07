@@ -257,7 +257,7 @@ metric_store的相关配置信息在/metric_store/conf/metric.conf文件中配�
                      
  确认修改配置
  
- .. code-block:: shell
+.. code-block:: shell
 
    sh setup.sh
  
