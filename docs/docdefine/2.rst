@@ -1,0 +1,16 @@
+.. _reference:
+
+==================
+reference
+==================
+
+  
+参考文档
+---------
+::
+  
+  环境安装  http://readthedocsorg.readthedocs.io/en/latest/getting_started.html
+  文档样例  http://mozilla-version-control-tools.readthedocs.io/en/latest/index.html
+  文档语法  http://docutils.sourceforge.net/docs/user/rst/quickref.html#definition-lists
+
+  
