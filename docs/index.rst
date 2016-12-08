@@ -41,13 +41,14 @@ Table of Contents
 
 .. toctree::
    :maxdepth: 2
-
+ 
+   
    manual/index
    tech/index
    api/index
    installing/index
    releasenotes/index
-
+   docdefine/index
 
 Indices and tables
 ==================
