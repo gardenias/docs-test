@@ -8,6 +8,8 @@ ROOT = os.path.normpath(os.path.join(HERE, '..'))
 
 sys.path.append(os.path.abspath('exts'))
 
+sys.path.append(os.path.abspath('exts'))
+
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.doctest',
