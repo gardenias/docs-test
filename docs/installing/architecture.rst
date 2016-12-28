@@ -7,62 +7,158 @@ Architecture
 
 系统架构
 --------------
-.. image:: ../images/architecture.png
+# .. image:: ../images/architecture.png
+
 
 流程图
 --------------
 
-系统流程图
+1. 系统总流程图
 ^^^^^^^^^^^^^^
+
+.. graphviz::
+
+    digraph Application{
+      rankdir = BT;
+
+      compound=true;
+      ranksep=0.95;
+
+      node [fontsize = 14, shape = "record", fillcolor=yellow, style="filled"];
+
+      subgraph cluster_dc {
+         label="数据采集";
+         d [label="DataCollector"];
+      }
+
+      subgraph cluster_consumer {
+         label="数据分析处理";
+         con [label="Consumer"];
+      }
+
+      subgraph cluster_dv {
+         label="数据展示";
+         dv [label="DasWeb"];
+      }
+
+      subgraph cluster_middware {
+         label="Components";
+         node [shape="component", fillcolor="lightseagreen", style="filled"];
+         redis [label="Redis Cache"];
+         db [label="DataBase"];
+         metric [label="MetricStore & ClickHouse"];
+      }
+      subgraph cluster_zk {
+        label="Message";
+        node [shape="component", fillcolor="lightskyblue", style="filled"];
+        zk [label="Kafak & Zookeeper"];
+      }
+
+      subgraph cluster_atosl {
+         label="符号化组件";
+         node [shape=component, fillcolor=".7 .3 1.0", style="filled"];
+         atosl [label="Atosl Service"];
+      }
+
+      subgraph cluster_users {
+         label="客户相关人员";
+         node [shape="ellipse", margin=0.1, fillcolor=white];
+         others [label="..."];
+         manager [label="Manager"];
+         developer [label="Developer"];
+         it [label="IT Operator"];
+      }
+
+
+      a [label="iOS|Android Agents", shape="ellipse", margin=0.1, fillcolor=white];
+
+      a -> d [lhead=cluster_dc];
+      d -> redis [lhead=cluster_middware];
+      d -> zk [lhead=cluster_zk];
+
+      atosl -> con [lhead=cluster_consumer,ltail=cluster_atosl];
+      con -> zk [dir=both,lhead=cluster_zk,ltail=cluster_consumer]
+      con -> db [lhead=cluster_middware, ltail=cluster_consumer];
+
+      atosl -> dv [ltail=cluster_atosl,lhead=cluster_dv];
+      db -> dv [lhead=cluster_dv,ltail=cluster_middware];
+      dv -> developer [lhead=cluster_users,ltail=cluster_dv];
+    }
+
+2. 数据采集模块数据流图
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 .. graphviz::
 
     digraph Dc {
 
-		node [margin=0.2, fontsize=16, shape=box, style="rounded,filled", fillcolor=white]
-		a [label="MobileAgent", shape="ellipse", margin=0.1]
+
+		node [fontsize=14, shape=box, style="filled", fillcolor=white]
+		a [label="iOS|Android Agents", shape="ellipse", margin=0.1]
 		d [label="DataCollector", fillcolor=yellow]
-		k [label="Kafka/Zookeeper"]
-		r [label="Redis"]
-		m [label="mysql", fillcolor=deepskyblue1]
+		k [label="Kafka/Zookeeper", shape="component", fillcolor="lightseagreen"]
+		r [label="Redis", shape="component", fillcolor="lightseagreen"]
+		m [label="mysql", shape="component", fillcolor="lightseagreen"]
 
 		a -> d -> {k,r,m}
     {m, r} -> d
 	}
 
+3. 数据处理模块数据流图
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 .. graphviz::
 
     digraph Consumer {
 
-  	node [margin=0.2, fontsize=16, shape=box, style="rounded,filled", fillcolor=white]
+  	node [fontsize=14, shape=box, style="filled", fillcolor=white]
   	con [label="Consumer", fillcolor=yellow]
-  	k [label="Kafka/Zookeeper"]
-  	r [label="Redis"]
-  	metric [label="{ ClickHouse | MetricStore }", shape=record, fillcolor=deepskyblue1]
-  	m [label="mysql", fillcolor=deepskyblue1]
+    k [label="Kafka/Zookeeper", shape="component", fillcolor="lightseagreen"]
+    r [label="Redis", shape="component", fillcolor="lightseagreen"]
+    m [label="mysql", shape="component", fillcolor="lightseagreen"]
+
+  	metric [label="MetricStore & ClickHouse", shape="component", fillcolor="lightseagreen", style="filled"];
+
     osl [label="atosl", shape=box,style=filled,color=".7 .3 1.0", fillcolor=".7 .3 1.0"]
 
-    {m,r,k,osl} -> con -> {m,k,r,metric}
-
+    {m,r,k,osl} -> con -> {m,k,r}
+    k -> metric;
   }
+
+
+4. 数据展示模块数据流图
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. graphviz::
 
-      digraph Consumer {
-  		node [margin=0.2, fontsize=16, shape=box, style="rounded,filled", fillcolor=white]
+      digraph DasWeb {
+      rankdir = BT;
+      compound=true;
+      ranksep=0.75;
+
+  		node [fontsize=14, shape=box, style="rounded,filled", fillcolor=white]
 
   		dv [label="DasWeb", fillcolor=yellow]
-  		r [label="Redis"]
 
-      metric [label="{ ClickHouse | MetricStore }", shape=record, fillcolor=deepskyblue1]
-  		m [label="mysql", fillcolor=deepskyblue1]
+      r [label="Redis", shape="component", fillcolor="lightseagreen"]
+      m [label="mysql", shape="component", fillcolor="lightseagreen"]
+      metric [label="MetricStore & ClickHouse", shape="component", fillcolor="lightseagreen", style="filled"];
 
       osl [label="atosl", shape=box,style=filled,color=".7 .3 1.0", fillcolor=".7 .3 1.0"]
 
-  		{r, m, metric, osl} -> dv
+      subgraph cluster_users {
+         label="客户相关人员";
+         node [shape="ellipse", margin=0.1, fillcolor=white];
+         others [label="..."];
+         manager [label="Manager"];
+         developer [label="Developer"];
+         it [label="IT Operator"];
+      }
+
+  		{r, m, metric, osl} -> dv;
+      dv -> developer [lhead=cluster_users];
   	}
 
-流程图详解
-^^^^^^^^^^^^^^
+5. 流程图详解
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 .. uml::
 
     @startuml
