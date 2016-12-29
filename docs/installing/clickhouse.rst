@@ -56,19 +56,16 @@ OR
 
 	$ /etc/init.d/clickhouse-server <start|stop|status...>
 
-
-
 验证服务
 ------------------
 + 查看到8123端口监听状态
-:: 
-    
-    $ netstat -anp | grep 8123
-    tcp6    0  0 :::8123         :::*      LISTEN   30883/clickhouse-se
- 
-+ 访问服务地址返回ok状态
+
 ::
+  $ netstat -anp | grep 8123
+  tcp6    0  0 :::8123         :::*      LISTEN   30883/clickhouse-se
 
-    $ curl localhost:8123
-    Ok.
++ 访问服务地址返回ok状态
 
+::
+  $ curl localhost:8123
+  Ok.

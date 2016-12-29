@@ -1,14 +1,12 @@
 ﻿.. _installing_mi:
 
-==============================
+===============
 Mi安装手册
-==============================
+===============
 
 
 软件需求
 -------------------
-
-
 +------------+----------------+------------------------------------------------------------------------------------+
 | 组件       | 版本           | 下载地址                                                                           |
 +============+================+====================================================================================+
@@ -27,26 +25,23 @@ Mi安装手册
 | ClickHouse | 1.1.54023      |  https://dist.apache.org/repos/dist/release/kafka/0.8.2.2/kafka_2.9.2-0.8.2.2.tgz  |
 +------------+----------------+------------------------------------------------------------------------------------+
 
-
 .. important::
-
-  
   确认以上公共组件全部安装成功，再开始安装Mi后台，具体的安装方法请查看组件安装章节。
   环境需求:除以上软件要求还需检查当前环境有没有安装telnet和关闭防火墙
-  
+
 .. code-block:: shell
 
   #判断系统是否已经安装telnet客户端及服务端
-  rpm -qa | grep "telnet"
-  
+  $ rpm -qa | grep "telnet"
+
   #安装使用如下命令
-  yum install telnet
-  
-  #centos7关闭防火墙，开启防火墙  
-  systemctl stop firewalld.service
-  
+  $ yum install telnet
+
+  #centos7关闭防火墙，开启防火墙
+  $ systemctl stop firewalld.service
+
   #关闭防火墙的开机启动
-  systemctl disable firewalld.service
+  $ systemctl disable firewalld.service
 
 安装包结构说明
 -------------------
@@ -56,19 +51,16 @@ Mi安装手册
 解压拿到的安装包OneAPM-Mobile-Insight-Installer.tar.gz
 
 ::
-
   $ tar -zxvf OneAPM-Mobile-Insight-Installer.tar.gz
 
 进入解压后的目录（接下来的操作都基于这个目录执行）
 
 ::
-
   $ cd OneAPM-Mobile-Insight-Installer
 
 安装包结构如下：
 
 ::
-
    ├── dist
    │   ├── das-web
    │   │   ├── bin
@@ -102,7 +94,7 @@ Mi安装手册
    │   └── upgradeSql
    └── tools
 
-  
+
 创建 kafka topics
 -------------------
 
@@ -127,7 +119,7 @@ Mi安装手册
 +--------------------------+----------------------+----------------------+
 |mi_tl_format_measurement  |          1           |         8            |
 +--------------------------+----------------------+----------------------+
- 
+
 3.  告警模块 ``optional`` [如果安装了系统告警模块，请创建以下topics]
 
 +--------------------------+----------------------+----------------------+
@@ -139,43 +131,41 @@ Mi安装手册
 +--------------------------+----------------------+----------------------+
 
 **创建topics的命令:**
-::
 
+::
   $ $KAFKA_HOME/bin/kafka-topics.sh --zookeeper <zookeeper:port> --topic <topic_name>   --replication-factor <factor_num>   --partitions <partion_num>  --create
 
 .. important::
-  
   kafka 集群为单节点时 ``factor-num`` 必须为 ``1``;
   ``factor-num`` <= ``集群中节点总数``
-
 
 **验证topics是否创建成功**
 
 ::
-
   $ /opt/kafka-0.8.2.2/bin/kafka-topics.sh –list –zookeeper <zookeeper host:port>
 
 
 
 
 Mysql和ClickHouse初始化
--------------------
+--------------------------------------
 sql文件位于OneAPM-Mobile-Insight-Installer/sql目录下
 
 开始安装 Mobile Insight
--------------------
-目前该版本仅支持全量安装
+--------------------------------------
 
-^^^^^^^^^^^^^^^
-1.需要执行sql/databases目录下所有的sql文件
-2.需要单独执行sql/upgradeSql目录下das-ee-4.3.2-alarm.sql文件
+目前该版本仅支持全量安装
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1. 需要执行sql/databases目录下所有的sql文件
+2. 需要单独执行sql/upgradeSql目录下das-ee-4.3.2-alarm.sql文件
 
 
 配置说明
-=========
+==================
 
 DC/DV/CONSUMER配置修改
-~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 基础配置mysql|kafka|zookeeper|redis|clickhouse地址在/install.properties文件中配置
 
 .. code-block:: shell
@@ -194,7 +184,7 @@ DC/DV/CONSUMER配置修改
 
   #格式ip:port
   redis_ip=REDIS_IP:PORT
-  
+
   #格式password，不需要密码则设置为n
   redis_password=REDIS_PASSWORD
 
@@ -236,7 +226,7 @@ DC/DV/CONSUMER配置修改
   #port
   clickHouse_port=8123
 
-  
+
 确认修改配置
 
 .. code-block:: shell
@@ -258,7 +248,7 @@ metric_store的相关配置信息在/metric_store/conf/metric.conf文件中配�
   bootstraps=KAFKA_IP:PORT
   zookeeper=ZOOKEEPER_IP:PORT
   metric_store_port=METRIC_STORE:PORT
-  
+
 举例：
 
 .. code-block:: shell
@@ -269,14 +259,14 @@ metric_store的相关配置信息在/metric_store/conf/metric.conf文件中配�
   bootstraps=10.128.9.132:9092
   zookeeper=10.128.9.132:2181
   metric_store_port=9123
-                     
+
  确认修改配置
- 
+
 .. code-block:: shell
 
    sh setup.sh
 
-   
+
 相关服务配置
 ~~~~~~~~~~~~~~~~~~~~~~~
 用户中心配置
@@ -285,22 +275,22 @@ metric_store的相关配置信息在/metric_store/conf/metric.conf文件中配�
 .. code-block:: shell
 
   #启动该配置项后，需要修改login_domain,logout_domain为企业级用户中心通过页面访问时的机器地址加端口
-  #修改login_path，logout_path为登陆页面的路径  
+  #修改login_path，logout_path为登陆页面的路径
   user-center-ee=true                             ###是否使用企业级用户中心,使用为true,不使用为false
   local_session=false                             ###使用企业级用户中心时为false,单点登陆时为true
 
-  login_domain=/mobile/login                        ### 需要配置为用户中心的访问domain 
+  login_domain=/mobile/login                        ### 需要配置为用户中心的访问domain
   login_check_domain=http://mi.oneapm.ent:8080      ### 需要配置为用户中心的访问domain
-  login_path=/mobile/login                          ### 需要配置为用户中心的访问url 
-  logout_domain=http://mi.oneapm.ent:8080           ### 需要配置为用户中心的访问domain 
+  login_path=/mobile/login                          ### 需要配置为用户中心的访问url
+  logout_domain=http://mi.oneapm.ent:8080           ### 需要配置为用户中心的访问domain
   logout_path=/mobile/logout                        ### 需要配置为用户中心的访问url
-        
-  
+
+
   #mi页面访问时的机器地址加端口
   mi.host.facade=http://127.0.0.1:8080
-  
-  
-  
+
+
+
 
 
 
@@ -337,15 +327,15 @@ metric_store的相关配置信息在/metric_store/conf/metric.conf文件中配�
 
 .. code-block:: shell
 
-  ./package_dir/start.sh dc 
-  ./package_dir/shutdown.sh dc 
+  ./package_dir/start.sh dc
+  ./package_dir/shutdown.sh dc
 
 示例：
 
 .. code-block:: shell
 
   ./package_dir/start.sh dc "-Xmx10240m -Xms10240m -Xmn5120m"
-  ./package_dir/shutdown.sh dc 
+  ./package_dir/shutdown.sh dc
 
 
 启停DV
@@ -353,7 +343,7 @@ metric_store的相关配置信息在/metric_store/conf/metric.conf文件中配�
 
 .. code-block:: shell
 
-  ./package_dir/start.sh dv 
+  ./package_dir/start.sh dv
   ./package_dir/shutdown.sh dv
 
 示例：
@@ -385,8 +375,3 @@ metric_store的相关配置信息在/metric_store/conf/metric.conf文件中配�
 
   ./package_dir/metric-store/bin/startup.sh
   ./package_dir/metric-store/bin/shutdown_ms.sh
-
-
-
-
-
