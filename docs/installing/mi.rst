@@ -51,16 +51,19 @@ Mi安装手册
 解压拿到的安装包OneAPM-Mobile-Insight-Installer.tar.gz
 
 ::
+
   $ tar -zxvf OneAPM-Mobile-Insight-Installer.tar.gz
 
 进入解压后的目录（接下来的操作都基于这个目录执行）
 
 ::
+
   $ cd OneAPM-Mobile-Insight-Installer
 
 安装包结构如下：
 
 ::
+
    ├── dist
    │   ├── das-web
    │   │   ├── bin
@@ -133,6 +136,7 @@ Mi安装手册
 **创建topics的命令:**
 
 ::
+
   $ $KAFKA_HOME/bin/kafka-topics.sh --zookeeper <zookeeper:port> --topic <topic_name>   --replication-factor <factor_num>   --partitions <partion_num>  --create
 
 .. important::
@@ -142,6 +146,7 @@ Mi安装手册
 **验证topics是否创建成功**
 
 ::
+  
   $ /opt/kafka-0.8.2.2/bin/kafka-topics.sh –list –zookeeper <zookeeper host:port>
 
 
