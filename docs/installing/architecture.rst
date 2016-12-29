@@ -95,7 +95,7 @@ Architecture
 		node [fontsize=14, shape=box, style="filled", fillcolor=white]
 		a [label="iOS|Android Agents", shape="ellipse", margin=0.1]
 		d [label="DataCollector", fillcolor=yellow]
-		k [label="Kafka/Zookeeper", shape="component", fillcolor="lightseagreen"]
+		k [label="Kafka/Zookeeper", shape="component", fillcolor="lightskyblue"]
 		r [label="Redis", shape="component", fillcolor="lightseagreen"]
 		m [label="mysql", shape="component", fillcolor="lightseagreen"]
 
@@ -111,13 +111,13 @@ Architecture
 
   	node [fontsize=14, shape=box, style="filled", fillcolor=white]
   	con [label="Consumer", fillcolor=yellow]
-    k [label="Kafka/Zookeeper", shape="component", fillcolor="lightseagreen"]
+    k [label="Kafka/Zookeeper", shape="component", fillcolor="lightskyblue"]
     r [label="Redis", shape="component", fillcolor="lightseagreen"]
     m [label="mysql", shape="component", fillcolor="lightseagreen"]
 
   	metric [label="MetricStore & ClickHouse", shape="component", fillcolor="lightseagreen", style="filled"];
 
-    osl [label="atosl", shape=box,style=filled,color=".7 .3 1.0", fillcolor=".7 .3 1.0"]
+    osl [label="Atosl Service", shape=component,style=filled,color=".7 .3 1.0", fillcolor=".7 .3 1.0"]
 
     {m,r,k,osl} -> con -> {m,k,r}
     k -> metric;
@@ -142,7 +142,7 @@ Architecture
       m [label="mysql", shape="component", fillcolor="lightseagreen"]
       metric [label="MetricStore & ClickHouse", shape="component", fillcolor="lightseagreen", style="filled"];
 
-      osl [label="atosl", shape=box,style=filled,color=".7 .3 1.0", fillcolor=".7 .3 1.0"]
+      osl [label="Atosl Service", shape=component,style=filled,color=".7 .3 1.0", fillcolor=".7 .3 1.0"]
 
       subgraph cluster_users {
          label="客户相关人员";
