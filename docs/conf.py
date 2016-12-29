@@ -21,7 +21,7 @@ templates_path = ['_templates']
 
 source_suffix = '.rst'
 
-#source_encoding = 'utf-8-sig'
+source_encoding = 'utf-8'
 
 master_doc = 'index'
 
@@ -63,4 +63,3 @@ try:
     import reviewboard
 except ImportError:
     pass
-
