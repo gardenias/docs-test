@@ -4,13 +4,8 @@
 Kafak & Zookeeper
 ==================
 
-::
-
-  请参考 http://wiki.oneapm.me/pages/viewpage.action?pageId=14325153
-
 软件需求
 ------------------------
-
 +------------+----------------+
 | 组件       | 版本           |
 +============+================+
@@ -18,7 +13,10 @@ Kafak & Zookeeper
 +------------+----------------+
 
 .. important::
-	请配置 ``JAVA_HOME`` 环境变量
+
+  1. 请配置 ``JAVA_HOME`` 环境变量
+  2. 确保 kafka 和 zookeeper 之间双向网络畅通
+  3. 部署多个节点的集群时，确保及群众所有节点之前网络畅通
 
 下载与解压
 ------------------------
@@ -49,22 +47,44 @@ zookeeper配置
 	dataDir=/data
 	#存放日志文件目录
 	dataLogDir=/datalog
-	#zookeeper时间单位常量，zookeeper时间单位是多少个tick的
-	tickTime=2000
-	#与集群配置相关选项，是指leader与follower请求应答，最多不超过5tickTime
-	syncLimit=5
 	#是指zookeeper接受客户端初始化最长时间，超过这个时间，zookeeper认为客户端连接失败
 	initLimit=10
 
 -  **集群版**
 
-与单机版相比较，集群版还需在每一个zoo.cfg要添加一下配置,假设两台zookeeper服务组成一个集群。``注意:`` 需要在dataDir目录下创建myid文件，
-该文件只有一行，内容是该server的id，下面配置中，server.1的myid是1。
+以2三个zookeeper节点的集群为例,每个节点做相同执行以下系统的步骤：
+
+
+1. 在 ``dataDir`` 目录下创建 ``myid`` 文件; 该文件只有一行，内容是该server的id;
 
 ::
 
-  server.1=10.128.9.134:2888:3888  //2888是集群信息交流端口，leader与followers 用这个端口建立tcp连接
-  server.2=10.128.9.135:2888:3888  //3888是集群建立tcp连接选举产生leader的端口
+  $ cd /data
+  $ echo 1 > myid
+  $ ls
+  myid
+  $ cat myid
+  1
+
+2. ``zoo.cfg`` 增加如下配置项：
+
+::
+
+  #zookeeper时间单位常量，zookeeper时间单位是多少个tick的
+  tickTime=2000
+  #与集群配置相关选项，是指leader与follower请求应答，最多不超过5个tickTime
+  syncLimit=5
+  #2888是集群信息交流端口，leader与followers 用这个端口建立tcp连接;3888是集群建立tcp连接选举产生leader的端口
+  #myid为1的server的 host and ports
+  server.1=10.128.9.134:2888:3888
+  #myid为2的server的 host and ports
+  server.2=10.128.9.135:2888:3888
+  #myid为3的server的 host and ports
+  server.3=10.128.9.136:2888:3888
+
+.. important::
+  在zookeeper集群配置中，每个节点的 ``zoo.cfg`` 配置文件中的配置项除了文件夹路径可能不一样，其它应该保持一致;
+  节点自身的 ``myid`` 内容应该是不同的；myid是节点身份标示，必须唯一.
 
 zookeeper启动
 ------------------------
@@ -78,7 +98,7 @@ zookeeper启动脚本，在bin目录下，启动命名如下
 kafka配置
 ------------------------
 
--   **单机版** ``$KAFKA_HOME/config/server.properties``
+-   **单机版** ``$KAFKA_HOME/config/server.properties``; 确认以下配置正确，其它保持默认
 
 ::
 
@@ -94,12 +114,8 @@ kafka配置
 	advertised.port=9092
 	#根据zookeeper安装主机IP和端口号
 	zookeeper.conect=10.128.9.135:2181
-	#配置成true topic可以被删除
-	delete.topic.enable=true
 	#kafka日志存放目录
 	log.dirs=/tmp/log
-	#默认partitions数目
-	num.partitions=1
 
 
 -  **集群版**
@@ -158,5 +174,5 @@ kafka启动脚本，在bin目录下。deamon参数启动后自动退出日志，
 - 查看topic配置
 
 ::
-  
+
 	$ $KAFKA_HOME/bin/kafka-topics.sh --describe --zookeeper <zookeeper1:port1>[,zookeeper2:port2] --topic <topic_name>
