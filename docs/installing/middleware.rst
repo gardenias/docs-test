@@ -1,7 +1,7 @@
 ﻿.. _installing_middleware:
 
 ===============
-Middleware
+中间件安装
 ===============
 
 .. toctree::
