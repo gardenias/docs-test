@@ -345,9 +345,9 @@ Mobile Ingsight 产品安装手册
     用户中心与Mi产品是通过cookie实现统一登录控制的，所以在部署时请将Mi Dv 部署到与中户中心相同的顶级域名下；例如：``oneapm.ent``,  ``mi.oneapm.ent``, ``user.oneapm.ent``
 
   * 告警模块 
-
+  
       * ``$WORK_DIR/dist/das-web/config/application.properties``
-	  * ``$WORK_DIR/dist/data-consumer/config/application.properties``
+      * ``$WORK_DIR/dist/data-consumer/config/application.properties``
 	  
   .. code-block:: shell
 
@@ -356,7 +356,7 @@ Mobile Ingsight 产品安装手册
        alarmDetailListSize = 20	 
        mi.host.facade=http://127.0.0.1:8080   # mi页面访问时的机器地址加端口
 	 
-	  
+	    
   * ``$WORK_DIR/dist/das-web/config/alarm-config.json``
   * ``$WORK_DIR/dist/data-consumer/config/alarm-config.json``
   
