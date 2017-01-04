@@ -357,63 +357,63 @@ Mobile Ingsight 产品安装手册
        mi.host.facade=http://127.0.0.1:8080   # mi页面访问时的机器地址加端口
 	 
 	  
-	  * ``$WORK_DIR/dist/das-web/config/alarm-config.json``
+      * ``$WORK_DIR/dist/das-web/config/alarm-config.json``
 	  * ``$WORK_DIR/dist/data-consumer/config/alarm-config.json``
   
-  .. code-block:: shell	  
+      .. code-block:: shell	  
       
-	   #配置consumer和dv的alarm-config.json文件	 
-	   {
-          "alarmServiceUrl":"http://${ALERT_IP}}:${ALERT_PORT}/alert/v2/%s/",    #告警服务地址和端口
-		  "oneAlertUrl":"http://ci1.test.110monitor.com:28080/alert/api/",
-		  "tenant":"mi",                                                       #需要与告警服务里配置一致
-		  "numThreads": 4,
-		  "alarmStatusCachePrefix":"ALARM_STRATEGY_STATUS",
-		  "eventCachePrefix":"ALARM_EVENT_",
-		  "durationInMinutes":10,
-		  "clusterAggregation":false,                                          #如果部署版本为集群环境，该值应为true
-		  "kafka": {
-			"eventTopic":"as_jl_mi_event",                                     #MI告警事件流topic，在告警服务kafka中添加
-			"producer": {
-			  "metadata.broker.list": "${ALERT_KAFKA_IP}:${ALERT_KAFKA_PORT}", #告警服务的kafka地址和端口列表，多个地址逗号分割
-			  "serializer.class": "kafka.serializer.StringEncoder",
-			  "group.id": "alert.engine",                                      #告警服务kafka的MI的group
-			  "auto.commit.enable": "true",
-			  "auto.commit.interval.ms": "10000", 
-			  "consumer.timeout.ms": "-1",
-			  "zookeeper.session.timeout.ms": "600000",
-			  "zookeeper.connection.timeout.ms": "600000",
-			  "queued.max.message.chunks": "100",
-			  "fetch.message.max.bytes": "10485760",
-			  "fetch.min.bytes": "1",
-			  "fetch.wait.max.ms": "100",
-			  "rebalance.backoff.ms": "100000"
-			},
-			"alertTopic":"as_jl_mi_alert",                                     #告警服务产生告警事件流topic，在告警服务kafka中添加
-			"consumer": {
-			  "zookeeper.connect": "${ALERT_ZOOKEEPER_IP}:${ALERT_ZOOKEEPER_PORT}",#告警服务zookeeper地址和端口列表，多个地址逗号分割
-			  "serializer.class": "kafka.serializer.StringEncoder",
-			  "group.id": "alert.engine",                                      #告警服务kafka的MI的group
-			  "auto.commit.enable": "true",
-			  "auto.commit.interval.ms": "10000",
-			  "consumer.timeout.ms": "-1",
-			  "zookeeper.session.timeout.ms": "600000",
-			  "zookeeper.connection.timeout.ms": "600000",
-			  "queued.max.message.chunks": "100",
-			  "fetch.message.max.bytes": "10485760",
-			  "fetch.min.bytes": "1",
-			  "fetch.wait.max.ms": "100",
-			  "rebalance.backoff.ms": "100000"
-			}
-		  }
-		}
+        #配置consumer和dv的alarm-config.json文件	 
+		{
+            "alarmServiceUrl":"http://${ALERT_IP}}:${ALERT_PORT}/alert/v2/%s/",    #告警服务地址和端口
+            "oneAlertUrl":"http://ci1.test.110monitor.com:28080/alert/api/",
+		    "tenant":"mi",                                                       #需要与告警服务里配置一致
+		    "numThreads": 4,
+		    "alarmStatusCachePrefix":"ALARM_STRATEGY_STATUS",
+		    "eventCachePrefix":"ALARM_EVENT_",
+		    "durationInMinutes":10,
+		    "clusterAggregation":false,                                          #如果部署版本为集群环境，该值应为true
+		    "kafka": {
+		       "eventTopic":"as_jl_mi_event",                                     #MI告警事件流topic，在告警服务kafka中添加
+		       "producer": {
+			   "metadata.broker.list": "${ALERT_KAFKA_IP}:${ALERT_KAFKA_PORT}", #告警服务的kafka地址和端口列表，多个地址逗号分割
+			   "serializer.class": "kafka.serializer.StringEncoder",
+			   "group.id": "alert.engine",                                      #告警服务kafka的MI的group
+			   "auto.commit.enable": "true",
+			   "auto.commit.interval.ms": "10000", 
+			   "consumer.timeout.ms": "-1",
+			   "zookeeper.session.timeout.ms": "600000",
+			   "zookeeper.connection.timeout.ms": "600000",
+			   "queued.max.message.chunks": "100",
+			   "fetch.message.max.bytes": "10485760",
+			   "fetch.min.bytes": "1",
+			   "fetch.wait.max.ms": "100",
+			   "rebalance.backoff.ms": "100000"
+			 },
+			  "alertTopic":"as_jl_mi_alert",                                     #告警服务产生告警事件流topic，在告警服务kafka中添加
+			  "consumer": {
+                "zookeeper.connect": "${ALERT_ZOOKEEPER_IP}:${ALERT_ZOOKEEPER_PORT}",#告警服务zookeeper地址和端口列表，多个地址逗号分割
+			    "serializer.class": "kafka.serializer.StringEncoder",
+			    "group.id": "alert.engine",                                      #告警服务kafka的MI的group
+			    "auto.commit.enable": "true",
+                "auto.commit.interval.ms": "10000",
+			    "consumer.timeout.ms": "-1",
+			    "zookeeper.session.timeout.ms": "600000",
+			    "zookeeper.connection.timeout.ms": "600000",
+			    "queued.max.message.chunks": "100",
+			    "fetch.message.max.bytes": "10485760",
+			    "fetch.min.bytes": "1",
+			    "fetch.wait.max.ms": "100",
+                "rebalance.backoff.ms": "100000"
+			  }
+		    }
+        }
 		
 		
 		
 		
-  * ``$WORK_DIR/dist/data-consumer/config/alarm-config.json``
+      * ``$WORK_DIR/dist/data-consumer/config/alarm-config.json``
 		
-  .. code-block:: shell	 
+      .. code-block:: shell	 
   
 		#配置consumer中的邮件地址		
 		mail.host=smtp.exmail.qq.com      #邮箱服务器
@@ -424,36 +424,36 @@ Mobile Ingsight 产品安装手册
 		mail.sender.password = password   #发件箱密码  
 
 
-  * 符号化服务 
+     * 符号化服务 
 
       * ``$WORK_DIR/dist/das-web/config/application.properties``
       * ``$WORK_DIR/dist/data-consumer/config/application.properties``
 	  
-  .. note::
+      .. note::
 
-    1.需下载系统符号化文件到指定目录下
-    2.符号化文件下载地址：https://pan.baidu.com/s/1bJRgce 密码：k3p6
-    3.文件目录地址：dv的application.properties中dsym_upload_path(默认为/oneapm/das/upload/dsym)，可以修改为应用能访问的某个路径，不要放在tmp目录下
-    4.解压 iOS 自带的符号表文件包，解压压缩包 iOSDeviceSupport_arm_v7_v7s_64.zip 到上一步由 dsym_upload_path 配置项指定的符号表文件的存储路径下；注意,压缩包解压后不要保留最外层的目录.
+        1. 需下载系统符号化文件到指定目录下
+        2. 符号化文件下载地址：https://pan.baidu.com/s/1bJRgce 密码：k3p6
+        3. 文件目录地址：dv的application.properties中dsym_upload_path(默认为/oneapm/das/upload/dsym)，可以修改为应用能访问的某个路径，不要放在tmp目录下
+        4. 解压 iOS 自带的符号表文件包，解压压缩包 iOSDeviceSupport_arm_v7_v7s_64.zip 到上一步由 dsym_upload_path 配置项指定的符号表文件的存储路径下；注意,压缩包解压后不要保留最外层的目录.
 		
 	  
-  .. code-block:: shell
+      .. code-block:: shell
   
-      ## ----------- 以下是iOS符号化的相关配置 -----------------
-	  # --------------------------------------------------------------------------
-	  #used by ios crash, dwarf upload file path ,author lpf
-	  # 是否开启符号化
-	  do_symbolic=true
-	  ##true or false. default false, effect when do_symbolic is true and this is true
-	  do_symbolic_when_view=true
-	  # 符号表存储的host
-	  dsym_host=localhost
-	  # 符号表存储的根路径
-	  dsym_upload_path=/tmp/das/upload/dsym
-	  # 符号化服务器主服务的url
-	  atoslServiceUrl=http://10.128.9.134:8081/hessian/atosl   #符号化主服务地址(如果符号化没有占用很多资源可以配置dv地址，如果占用资源较多，可部署一台机器部署dv代码单独提供符号化服务)
-	  # 符号化服务器备用服务的url
-	  atoslServiceUrl2 =http://10.128.9.134:8081/hessian/atosl #符号化备服务地址(如果符号化没有占用很多资源可以配置dv地址，如果占用资源较多，可部署一台机器部署dv代码单独提供符号化服务)
+        ## ----------- 以下是iOS符号化的相关配置 -----------------
+	    # --------------------------------------------------------------------------
+	    #used by ios crash, dwarf upload file path ,author lpf
+	    # 是否开启符号化
+	    do_symbolic=true
+	    ##true or false. default false, effect when do_symbolic is true and this is true
+	    do_symbolic_when_view=true
+	    # 符号表存储的host
+	    dsym_host=localhost
+	    # 符号表存储的根路径
+	    dsym_upload_path=/tmp/das/upload/dsym
+	    # 符号化服务器主服务的url
+	    atoslServiceUrl=http://10.128.9.134:8081/hessian/atosl   #符号化主服务地址(如果符号化没有占用很多资源可以配置dv地址，如果占用资源较多，可部署一台机器部署dv代码单独提供符号化服务)
+	    # 符号化服务器备用服务的url
+	    atoslServiceUrl2 =http://10.128.9.134:8081/hessian/atosl #符号化备服务地址(如果符号化没有占用很多资源可以配置dv地址，如果占用资源较多，可部署一台机器部署dv代码单独提供符号化服务)
 	  
 	  
 
