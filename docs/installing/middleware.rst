@@ -7,7 +7,7 @@
 .. toctree::
    :maxdepth: 2
 
-   1.mysql
-   2.redis
-   3.kafka
-   4.clickhouse
+   mysql
+   redis
+   kafka
+   clickhouse
