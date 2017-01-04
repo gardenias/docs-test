@@ -357,10 +357,10 @@ Mobile Ingsight 产品安装手册
        mi.host.facade=http://127.0.0.1:8080   # mi页面访问时的机器地址加端口
 	 
 	  
-      * ``$WORK_DIR/dist/das-web/config/alarm-config.json``
-	  * ``$WORK_DIR/dist/data-consumer/config/alarm-config.json``
+  * ``$WORK_DIR/dist/das-web/config/alarm-config.json``
+  * ``$WORK_DIR/dist/data-consumer/config/alarm-config.json``
   
-      .. code-block:: shell	  
+  .. code-block:: shell	  
       
         #配置consumer和dv的alarm-config.json文件	 
 		{
@@ -411,9 +411,9 @@ Mobile Ingsight 产品安装手册
 		
 		
 		
-      * ``$WORK_DIR/dist/data-consumer/config/alarm-config.json``
+  * ``$WORK_DIR/dist/data-consumer/config/alarm-config.json``
 		
-      .. code-block:: shell	 
+  .. code-block:: shell	 
   
 		#配置consumer中的邮件地址		
 		mail.host=smtp.exmail.qq.com      #邮箱服务器
@@ -424,12 +424,12 @@ Mobile Ingsight 产品安装手册
 		mail.sender.password = password   #发件箱密码  
 
 
-     * 符号化服务 
+  * 符号化服务 
 
       * ``$WORK_DIR/dist/das-web/config/application.properties``
       * ``$WORK_DIR/dist/data-consumer/config/application.properties``
 	  
-      .. note::
+  .. note::
 
         1. 需下载系统符号化文件到指定目录下
         2. 符号化文件下载地址：https://pan.baidu.com/s/1bJRgce 密码：k3p6
@@ -437,7 +437,7 @@ Mobile Ingsight 产品安装手册
         4. 解压 iOS 自带的符号表文件包，解压压缩包 iOSDeviceSupport_arm_v7_v7s_64.zip 到上一步由 dsym_upload_path 配置项指定的符号表文件的存储路径下；注意,压缩包解压后不要保留最外层的目录.
 		
 	  
-      .. code-block:: shell
+  .. code-block:: shell
   
         ## ----------- 以下是iOS符号化的相关配置 -----------------
 	    # --------------------------------------------------------------------------
