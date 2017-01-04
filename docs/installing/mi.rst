@@ -425,6 +425,34 @@ Mobile Ingsight 产品安装手册
 
       * ``$WORK_DIR/dist/das-web/config/application.properties``
       * ``$WORK_DIR/dist/das-consumer/config/application.properties``
+	  
+	  .. note::
+
+        1.需下载系统符号化文件到指定目录下
+		2.符号化文件下载地址：https://pan.baidu.com/s/1bJRgce 密码：k3p6
+		3.文件目录地址：dv的application.properties中dsym_upload_path(默认为/oneapm/das/upload/dsym)，可以修改为应用能访问的某个路径，不要放在tmp目录下
+		4.解压 iOS 自带的符号表文件包，解压压缩包 iOSDeviceSupport_arm_v7_v7s_64.zip 到上一步由 dsym_upload_path 配置项指定的符号表文件的存储路径下；注意,压缩包解压后不要保留最外层的目录.
+		
+	  
+  .. code-block:: shell
+  
+      ## ----------- 以下是iOS符号化的相关配置 -----------------
+	  # --------------------------------------------------------------------------
+	  #used by ios crash, dwarf upload file path ,author lpf
+	  # 是否开启符号化
+	  do_symbolic=true
+	  ##true or false. default false, effect when do_symbolic is true and this is true
+	  do_symbolic_when_view=true
+	  # 符号表存储的host
+	  dsym_host=localhost
+	  # 符号表存储的根路径
+	  dsym_upload_path=/tmp/das/upload/dsym
+	  # 符号化服务器主服务的url
+	  atoslServiceUrl=http://10.128.9.134:8081/hessian/atosl   #符号化主服务地址(如果符号化没有占用很多资源可以配置dv地址，如果占用资源较多，可部署一台机器部署dv代码单独提供符号化服务)
+	  # 符号化服务器备用服务的url
+	  atoslServiceUrl2 =http://10.128.9.134:8081/hessian/atosl #符号化备服务地址(如果符号化没有占用很多资源可以配置dv地址，如果占用资源较多，可部署一台机器部署dv代码单独提供符号化服务)
+	  
+	  
 
 4. 服务启动、关闭
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
