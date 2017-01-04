@@ -28,7 +28,7 @@ Mobile Ingsight 产品安装手册
 .. important::
   请确认以上组件全部安装成功，再开始安装Mi后台。具体的安装方法请查看中间件安装章节。
 
-  环境需求:Mi产品和组件之间网络及相关端口胡同，请用telnet工具做网络环境检查
+  环境需求:Mi产品和组件之间网络及相关端口互通，请用telnet工具或者其他工具做网络环境检查
 
   centOS 上telnet工具安装和防火墙服务关闭命令示例：
 
@@ -323,6 +323,7 @@ Mobile Ingsight 产品安装手册
       * ``$WORK_DIR/dist/data-collector/config/application.properties``
 
     如果没有安装企业级用户中心，请使用默认配置；
+	
   .. code-block:: shell
 
         #启动该配置项后，需要修改login_domain,logout_domain为企业级用户中心通过页面访问时的机器地址加端口
@@ -346,6 +347,78 @@ Mobile Ingsight 产品安装手册
   * 告警模块 //TODO
 
       * ``$WORK_DIR/dist/das-web/config/application.properties``
+	  * ``$WORK_DIR/dist/data-consumer/config/application.properties``
+	  
+  .. code-block:: shell
+
+	  #配置consumer和dv的application.properties文件	  
+      alarmDetailQueryUrl=http://${ALERT_IP}:${ALERT_PORT}/alert/v2/events?eventCategory=HealthRuleViolationEvent&ruleId=RuleHolder&endTime=EndTimeHolder&duration=DurationHolder&sortCol=timestamp&order=desc  # 配置告警服务的地址和端口
+      alarmDetailListSize = 20	 
+      mi.host.facade=http://127.0.0.1:8080   # mi页面访问时的机器地址加端口
+	  
+	  
+	  * ``$WORK_DIR/dist/das-web/config/alarm-config.json``
+	  * ``$WORK_DIR/dist/data-consumer/config/alarm-config.json``
+  
+  .. code-block:: shell	  
+      
+	  #配置consumer和dv的alarm-config.json文件	 
+	  {
+		"alarmServiceUrl":"http://${ALERT_IP}}:${ALERT_PORT}/alert/v2/%s/",    #告警服务地址和端口
+		"oneAlertUrl":"http://ci1.test.110monitor.com:28080/alert/api/",
+		  "tenant":"mi",                                                       #需要与告警服务里配置一致
+		  "numThreads": 4,
+		  "alarmStatusCachePrefix":"ALARM_STRATEGY_STATUS",
+		  "eventCachePrefix":"ALARM_EVENT_",
+		  "durationInMinutes":10,
+		  "clusterAggregation":false,                                          #如果部署版本为集群环境，该值应为true
+		  "kafka": {
+			"eventTopic":"as_jl_mi_event",                                     #MI告警事件流topic，在告警服务kafka中添加
+			"producer": {
+			  "metadata.broker.list": "${ALERT_KAFKA_IP}:${ALERT_KAFKA_PORT}", #告警服务的kafka地址和端口列表，多个地址逗号分割
+			  "serializer.class": "kafka.serializer.StringEncoder",
+			  "group.id": "alert.engine",                                      #告警服务kafka的MI的group
+			  "auto.commit.enable": "true",
+			  "auto.commit.interval.ms": "10000", 
+			  "consumer.timeout.ms": "-1",
+			  "zookeeper.session.timeout.ms": "600000",
+			  "zookeeper.connection.timeout.ms": "600000",
+			  "queued.max.message.chunks": "100",
+			  "fetch.message.max.bytes": "10485760",
+			  "fetch.min.bytes": "1",
+			  "fetch.wait.max.ms": "100",
+			  "rebalance.backoff.ms": "100000"
+			},
+			"alertTopic":"as_jl_mi_alert",                                     #告警服务产生告警事件流topic，在告警服务kafka中添加
+			"consumer": {
+			  "zookeeper.connect": "${ALERT_ZOOKEEPER_IP}:${ALERT_ZOOKEEPER_PORT}",#告警服务zookeeper地址和端口列表，多个地址逗号分割
+			  "serializer.class": "kafka.serializer.StringEncoder",
+			  "group.id": "alert.engine",                                      #告警服务kafka的MI的group
+			  "auto.commit.enable": "true",
+			  "auto.commit.interval.ms": "10000",
+			  "consumer.timeout.ms": "-1",
+			  "zookeeper.session.timeout.ms": "600000",
+			  "zookeeper.connection.timeout.ms": "600000",
+			  "queued.max.message.chunks": "100",
+			  "fetch.message.max.bytes": "10485760",
+			  "fetch.min.bytes": "1",
+			  "fetch.wait.max.ms": "100",
+			  "rebalance.backoff.ms": "100000"
+			}
+		  }
+		}
+		
+		* ``$WORK_DIR/dist/data-consumer/config/alarm-config.json``
+		
+  .. code-block:: shell	  
+		#配置consumer中的邮件地址
+		
+		mail.host=smtp.exmail.qq.com      #邮箱服务器
+		mail.auth=true                    #身份验证
+		mail.transport.protocol =smtp     #邮箱服务器协议
+		mail.host.port =-1                #服务器端口
+		mail.user =***@mail.com           #发件箱
+		mail.sender.password = password   #发件箱密码  
 
 
   * 符号化服务 //TODO
