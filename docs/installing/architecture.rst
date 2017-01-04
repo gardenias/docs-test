@@ -4,7 +4,8 @@
 系统架构
 ===============
 
-# .. image:: ../images/architecture.png
+..
+ .. image:: ../images/architecture.png
 
 1. 系统总流程图
 ----------------------------
