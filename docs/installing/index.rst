@@ -1,5 +1,4 @@
-.. 
- _installing_index:
+.. _installing_index:
 
 ===============
 Installing
