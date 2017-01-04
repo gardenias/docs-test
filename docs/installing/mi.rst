@@ -298,6 +298,8 @@ Mobile Ingsight 产品安装手册
     1 // 选择1，进行静默安装
 
 修改的配置文件列表：
+
+.. code-block:: shell
   1. /dist/das-web/config/application.properties
   2. /dist/das-web/config/gear.properties
   3. /dist/data-collector/config/application.properties
