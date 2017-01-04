@@ -344,28 +344,28 @@ Mobile Ingsight 产品安装手册
 
     用户中心与Mi产品是通过cookie实现统一登录控制的，所以在部署时请将Mi Dv 部署到与中户中心相同的顶级域名下；例如：``oneapm.ent``,  ``mi.oneapm.ent``, ``user.oneapm.ent``
 
-  * 告警模块 //TODO
+  * 告警模块 
 
       * ``$WORK_DIR/dist/das-web/config/application.properties``
 	  * ``$WORK_DIR/dist/data-consumer/config/application.properties``
 	  
   .. code-block:: shell
 
-	  #配置consumer和dv的application.properties文件	  
-      alarmDetailQueryUrl=http://${ALERT_IP}:${ALERT_PORT}/alert/v2/events?eventCategory=HealthRuleViolationEvent&ruleId=RuleHolder&endTime=EndTimeHolder&duration=DurationHolder&sortCol=timestamp&order=desc  # 配置告警服务的地址和端口
-      alarmDetailListSize = 20	 
-      mi.host.facade=http://127.0.0.1:8080   # mi页面访问时的机器地址加端口
-	  
+	   #配置consumer和dv的application.properties文件	  
+       alarmDetailQueryUrl=http://${ALERT_IP}:${ALERT_PORT}/alert/v2/events?eventCategory=HealthRuleViolationEvent&ruleId=RuleHolder&endTime=EndTimeHolder&duration=DurationHolder&sortCol=timestamp&order=desc  # 配置告警服务的地址和端口
+       alarmDetailListSize = 20	 
+       mi.host.facade=http://127.0.0.1:8080   # mi页面访问时的机器地址加端口
+	 
 	  
 	  * ``$WORK_DIR/dist/das-web/config/alarm-config.json``
 	  * ``$WORK_DIR/dist/data-consumer/config/alarm-config.json``
   
   .. code-block:: shell	  
       
-	  #配置consumer和dv的alarm-config.json文件	 
-	  {
-		"alarmServiceUrl":"http://${ALERT_IP}}:${ALERT_PORT}/alert/v2/%s/",    #告警服务地址和端口
-		"oneAlertUrl":"http://ci1.test.110monitor.com:28080/alert/api/",
+	   #配置consumer和dv的alarm-config.json文件	 
+	   {
+          "alarmServiceUrl":"http://${ALERT_IP}}:${ALERT_PORT}/alert/v2/%s/",    #告警服务地址和端口
+		  "oneAlertUrl":"http://ci1.test.110monitor.com:28080/alert/api/",
 		  "tenant":"mi",                                                       #需要与告警服务里配置一致
 		  "numThreads": 4,
 		  "alarmStatusCachePrefix":"ALARM_STRATEGY_STATUS",
@@ -408,11 +408,14 @@ Mobile Ingsight 产品安装手册
 		  }
 		}
 		
-		* ``$WORK_DIR/dist/data-consumer/config/alarm-config.json``
 		
-  .. code-block:: shell	  
-		#配置consumer中的邮件地址
 		
+		
+	 * ``$WORK_DIR/dist/data-consumer/config/alarm-config.json``
+		
+  .. code-block:: shell	 
+  
+		#配置consumer中的邮件地址		
 		mail.host=smtp.exmail.qq.com      #邮箱服务器
 		mail.auth=true                    #身份验证
 		mail.transport.protocol =smtp     #邮箱服务器协议
@@ -421,17 +424,17 @@ Mobile Ingsight 产品安装手册
 		mail.sender.password = password   #发件箱密码  
 
 
-  * 符号化服务 //TODO
+  * 符号化服务 
 
       * ``$WORK_DIR/dist/das-web/config/application.properties``
       * ``$WORK_DIR/dist/das-consumer/config/application.properties``
 	  
-	  .. note::
+  .. note::
 
-        1.需下载系统符号化文件到指定目录下
-		2.符号化文件下载地址：https://pan.baidu.com/s/1bJRgce 密码：k3p6
-		3.文件目录地址：dv的application.properties中dsym_upload_path(默认为/oneapm/das/upload/dsym)，可以修改为应用能访问的某个路径，不要放在tmp目录下
-		4.解压 iOS 自带的符号表文件包，解压压缩包 iOSDeviceSupport_arm_v7_v7s_64.zip 到上一步由 dsym_upload_path 配置项指定的符号表文件的存储路径下；注意,压缩包解压后不要保留最外层的目录.
+    1.需下载系统符号化文件到指定目录下
+	2.符号化文件下载地址：https://pan.baidu.com/s/1bJRgce 密码：k3p6
+	3.文件目录地址：dv的application.properties中dsym_upload_path(默认为/oneapm/das/upload/dsym)，可以修改为应用能访问的某个路径，不要放在tmp目录下
+	4.解压 iOS 自带的符号表文件包，解压压缩包 iOSDeviceSupport_arm_v7_v7s_64.zip 到上一步由 dsym_upload_path 配置项指定的符号表文件的存储路径下；注意,压缩包解压后不要保留最外层的目录.
 		
 	  
   .. code-block:: shell
