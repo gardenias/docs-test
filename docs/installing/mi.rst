@@ -411,7 +411,7 @@ Mobile Ingsight 产品安装手册
 		
 		
 		
-	 * ``$WORK_DIR/dist/data-consumer/config/alarm-config.json``
+  * ``$WORK_DIR/dist/data-consumer/config/alarm-config.json``
 		
   .. code-block:: shell	 
   
@@ -427,14 +427,14 @@ Mobile Ingsight 产品安装手册
   * 符号化服务 
 
       * ``$WORK_DIR/dist/das-web/config/application.properties``
-      * ``$WORK_DIR/dist/das-consumer/config/application.properties``
+      * ``$WORK_DIR/dist/data-consumer/config/application.properties``
 	  
   .. note::
 
     1.需下载系统符号化文件到指定目录下
-	2.符号化文件下载地址：https://pan.baidu.com/s/1bJRgce 密码：k3p6
-	3.文件目录地址：dv的application.properties中dsym_upload_path(默认为/oneapm/das/upload/dsym)，可以修改为应用能访问的某个路径，不要放在tmp目录下
-	4.解压 iOS 自带的符号表文件包，解压压缩包 iOSDeviceSupport_arm_v7_v7s_64.zip 到上一步由 dsym_upload_path 配置项指定的符号表文件的存储路径下；注意,压缩包解压后不要保留最外层的目录.
+    2.符号化文件下载地址：https://pan.baidu.com/s/1bJRgce 密码：k3p6
+    3.文件目录地址：dv的application.properties中dsym_upload_path(默认为/oneapm/das/upload/dsym)，可以修改为应用能访问的某个路径，不要放在tmp目录下
+    4.解压 iOS 自带的符号表文件包，解压压缩包 iOSDeviceSupport_arm_v7_v7s_64.zip 到上一步由 dsym_upload_path 配置项指定的符号表文件的存储路径下；注意,压缩包解压后不要保留最外层的目录.
 		
 	  
   .. code-block:: shell
