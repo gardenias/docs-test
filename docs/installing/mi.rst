@@ -460,6 +460,26 @@ Mobile Ingsight 产品安装手册
     atoslServiceUrl=http://10.128.9.134:8081/hessian/atosl   #符号化主服务地址(如果符号化没有占用很多资源可以配置dv地址，如果占用资源较多，可部署一台机器部署dv代码单独提供符号化服务)
     # 符号化服务器备用服务的url
     atoslServiceUrl2 =http://10.128.9.134:8081/hessian/atosl #符号化备服务地址(如果符号化没有占用很多资源可以配置dv地址，如果占用资源较多，可部署一台机器部署dv代码单独提供符号化服务)
+	
+  * metric_store超时配置
+  
+	  * ``$WORK_DIR/metric_store/touch-metric-store/conf/application.conf``
+	 
+  .. code-block:: shell
+	
+	##需要在metric_store的application.conf配置文件中添加超时配置
+    ##设置服务端超时时间：
+    akka.http.server.request-timeout=180s
+    ##设置客户端超时时间:
+    akka.http.client.idle-timeout = 180s
+	  
+	  * ``$WORK_DIR/dist/das-web/config/application.properties
+	
+   .. code-block:: shell
+	
+    ##DV需要再application.properties的QueryDS.url后面增加socketTimeout=180000
+	QueryDS.url=jdbc:METRIC_STORE://IP:PORT/all?f=druid&socketTimeout=180000
+	 
 
 
 
