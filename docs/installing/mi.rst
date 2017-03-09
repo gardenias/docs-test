@@ -464,7 +464,7 @@ Mobile Ingsight 产品安装手册
   * metric_store超时配置
   
 	  * ``$WORK_DIR/metric_store/touch-metric-store/conf/application.conf``
-	  * ``$WORK_DIR/dist/das-web/config/application.properties
+	  * ``$WORK_DIR/dist/das-web/config/application.properties``
 	 
   .. code-block:: shell
 	
