@@ -468,15 +468,15 @@ Mobile Ingsight 产品安装手册
 	 
   .. code-block:: shell
 	
-	##需要在metric_store的application.conf配置文件中添加超时配置
-    ##设置服务端超时时间：
+    ##需要在metric_store的application.conf配置文件中添加超时配置
+    #设置服务端超时时间：
     akka.http.server.request-timeout=180s
-    ##设置客户端超时时间:
+    #设置客户端超时时间:
     akka.http.client.idle-timeout = 180s
 	  
 	  
-    ##DV需要再application.properties的QueryDS.url后面增加socketTimeout=180000
-	QueryDS.url=jdbc:METRIC_STORE://IP:PORT/all?f=druid&socketTimeout=180000
+    #DV需要再application.properties的QueryDS.url后面增加socketTimeout=180000
+    QueryDS.url=jdbc:METRIC_STORE://IP:PORT/all?f=druid&socketTimeout=180000
 	 
 
 
