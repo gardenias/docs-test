@@ -464,6 +464,7 @@ Mobile Ingsight 产品安装手册
   * metric_store超时配置
   
 	  * ``$WORK_DIR/metric_store/touch-metric-store/conf/application.conf``
+	  * ``$WORK_DIR/dist/das-web/config/application.properties
 	 
   .. code-block:: shell
 	
@@ -473,10 +474,7 @@ Mobile Ingsight 产品安装手册
     ##设置客户端超时时间:
     akka.http.client.idle-timeout = 180s
 	  
-	  * ``$WORK_DIR/dist/das-web/config/application.properties
-	
-   .. code-block:: shell
-	
+	  
     ##DV需要再application.properties的QueryDS.url后面增加socketTimeout=180000
 	QueryDS.url=jdbc:METRIC_STORE://IP:PORT/all?f=druid&socketTimeout=180000
 	 
